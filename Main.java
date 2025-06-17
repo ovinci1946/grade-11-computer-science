@@ -7,7 +7,7 @@ public class Main {
         ArrayList<String> serviceCategories = new ArrayList<>();
         ArrayList<Double> hourlyRates = new ArrayList<>();
         ArrayList<Boolean> isBooked = new ArrayList<>();
-
+        ArrayList<Integer> cart = new ArrayList<>();
         boolean running = true;
 
         while(running) {
@@ -64,7 +64,7 @@ public class Main {
                         found.add(i);
                         String status;
                         if (isBooked.get(i)) {
-                            status = "Fully Booked";
+                            status = "fully Booked :( ";
                         } else {
                             status = "Available";
                         }
@@ -72,24 +72,39 @@ public class Main {
                     }
                 }
                 if (found.size() == 0) {
-                    System.out.println("No services in this category.");
+                    System.out.println("no services in this category.");
                 }
-                System.out.print("Pick a service number to book (0 to go back): ");
+                System.out.print("pick a service number to add to cart (0 to go back): "); // changed "book" to "add to cart"
                 int servNum = input.nextInt();
                 input.nextLine();
 
-                if (servNum < 1 || servNum > found.size()) {
+                if (servNum == 0) {
+                    // go back
+                } else if (servNum < 1 || servNum > found.size()) {
                     System.out.println(" not an option.");
-                }
-                int realIndex = found.get(servNum-1);
-                if (isBooked.get(realIndex)) {
-                    System.out.println("Sorry this service is fully booked.");
                 } else {
-                    isBooked.set(realIndex, true);
-                    System.out.println("Service is booked!");
+                    int realIndex = found.get(servNum-1);
+                    if (isBooked.get(realIndex)) {
+                        System.out.println("sorry this service is fully booked.");
+                    } else if (cart.contains(realIndex)) {
+                        System.out.println("this service is already in your cart.");
+                    } else {
+                        cart.add(realIndex);
+                        System.out.println("Service added to cart!");
+                    }
+                }
+                // shows cart after service is added
+                System.out.println("Your cart:");
+                if (cart.size() == 0) {
+                    System.out.println("Cart is empty.");
+                } else {
+                    for (int i = 0; i < cart.size(); i++) {
+                        int index = cart.get(i);
+                        System.out.println((i+1) + ". " + serviceNames.get(index) + " - $" + hourlyRates.get(index) + "/hr");
+                    }
                 }
             } else if (yourChoice == 3) {
-                System.out.println("thanks for using the marketplace!");
+                System.out.println("thanks for using olivers marketplace!"); // added my name
                 running = false;
             } else {
                 System.out.println(" not an option.");
