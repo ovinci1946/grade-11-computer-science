@@ -40,3 +40,25 @@ int realIndex - converts users choice to the services real index (subtract 1 fro
 
 
 
+
+
+
+PART 3
+from 6/16 at 8 pm to 10:23 pm, i finished part 3 (adding the cart)
+My first half of the code was deleted on accident, I had to rewrite it
+Tomorrow is part 4  (checkout)
+
+added
+ArrayList<Integer> cart - turns into a functioning online cart
+int index - gets the index of the service in the cart
+
+
+
+
+
+
+
+
+
+
+
