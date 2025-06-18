@@ -14,7 +14,9 @@ public class Main {
             System.out.println("\nWelcome to Olivers marketplace!");
             System.out.println("1 add a Service");
             System.out.println("2 browse & book a Service");
-            System.out.println("3 exit");
+            System.out.println("3 remove Service from Cart");
+            System.out.println("4 checkout");
+            System.out.println("5 exit");
             System.out.print("Choose an option: ");
             int yourChoice = input.nextInt();
             input.nextLine(); // clear input
@@ -104,6 +106,67 @@ public class Main {
                     }
                 }
             } else if (yourChoice == 3) {
+                // remove service from cart
+                if (cart.size() == 0) {
+                    System.out.println("cart is empty, nothing to remove.");
+                } else {
+                    System.out.println("your cart:");
+                    for (int i = 0; i < cart.size(); i++) {
+                        int index = cart.get(i);
+                        System.out.println((i+1) + ". " + serviceNames.get(index) + " - $" + hourlyRates.get(index) + "/hr");
+                    }
+                    System.out.print("Enter the number of the service to remove (0 to go back): ");
+                    int removeNum = input.nextInt();
+                    input.nextLine();
+                    if (removeNum == 0) {
+                        // go back
+                    } else if (removeNum < 1 || removeNum > cart.size()) {
+                        System.out.println(" not an option.");
+                    } else {
+                        int removeIndex = cart.get(removeNum-1);
+                        cart.remove(removeNum-1);
+                        // updates th availability
+                        isBooked.set(removeIndex, false);
+                        System.out.println("Service removed from cart.");
+                    }
+                    // show updated cart
+                    System.out.println("Your cart:");
+                    if (cart.size() == 0) {
+                        System.out.println("Cart is empty.");
+                    } else {
+                        for (int i = 0; i < cart.size(); i++) {
+                            int index = cart.get(i);
+                            System.out.println((i+1) + ". " + serviceNames.get(index) + " - $" + hourlyRates.get(index) + "/hr");
+                        }
+                    }
+                }
+            } else if (yourChoice == 4) {
+                // checkout
+                if (cart.size() == 0) {
+                    System.out.println("Cart is empty. Nothing to checkout.");
+                } else {
+                    double total = 0;
+                    System.out.println("Invoice:");
+                    for (int i = 0; i < cart.size(); i++) {
+                        int index = cart.get(i);
+                        System.out.println((i+1) + ". " + serviceNames.get(index) + " - $" + hourlyRates.get(index) + "/hr");
+                        total = total + hourlyRates.get(index); 
+                    }
+                    System.out.println("Total: $" + total);
+                    System.out.print("Confirm order? (yes/no): ");
+                    String confirm = input.nextLine();
+                    if (confirm.equalsIgnoreCase("yes")) {
+                        for (int i = 0; i < cart.size(); i++) {
+                            int index = cart.get(i);
+                            isBooked.set(index, true);
+                        }
+                        cart.clear();
+                        System.out.println("Thank you for your order!");
+                    } else {
+                        System.out.println("Order cancelled.");
+                    }
+                }
+            } else if (yourChoice == 5) {
                 System.out.println("thanks for using olivers marketplace!"); // added my name
                 running = false;
             } else {
