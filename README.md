@@ -61,4 +61,25 @@ int index - gets the index of the service in the cart
 
 
 
+PART 4 - FINAL
+from 6/17, 3:34 pm to 11:03 pm. I'm glad to say I've finished the marketplace. if it wasn't for some help from the help of my friend and going back and forth on previous lessons to code, I don't know how I'd do this.
+
+from him I learned
+.get - gets whats stored in array
+.set - lets you change arrays value, updates the availability
+.size - returns the size of the array
+.equalsIgnoreCase - does the confirm variable equal to yes (ignoring capitalization)
+
+added
+- remove service from cart
+- check out
+- int removeNum - lets you remove a service by using a number
+- int removeIndex - holds the actual index of the service that the user wants to remove from their cart
+
+
+
+
+
+
+
 
